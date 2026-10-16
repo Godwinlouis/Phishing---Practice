@@ -1,0 +1,497 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIMATS Engineering | Ethical Hacking | Cyber Detective</title>
+<style>
+:root{--bg:#0b1020;--panel:#151f38;--line:#344568;--text:#f4f7ff;--muted:#aab6d3;--cyan:#5de4ff;--purple:#9b7bff;--green:#b7f36b;--red:#ff7890;--gold:#ffd166}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top left,#302454,transparent 40%),radial-gradient(ellipse at top right,#103b4a,transparent 35%),var(--bg);color:var(--text);font:15px/1.55 system-ui,Arial,sans-serif}
+button,input{font:inherit}button{cursor:pointer;border:1px solid var(--line);background:#202c49;color:var(--text);padding:11px 15px;border-radius:11px}button:hover{border-color:var(--cyan)}button:disabled{opacity:.4;cursor:not-allowed}.primary{background:linear-gradient(110deg,#7458e8,#2799bb);border:0;font-weight:bold}
+.wrap{max-width:1200px;margin:auto;padding:20px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.brand{display:flex;align-items:center;gap:14px}.logo{width:58px;height:58px;border-radius:17px;background:linear-gradient(135deg,var(--purple),var(--cyan));display:grid;place-items:center;font-size:32px}
+.brand h1{margin:3px 0;font-size:clamp(23px,4vw,34px);line-height:1.1}.institution{font-size:12px;letter-spacing:1.6px;color:var(--cyan);font-weight:900}.sub{color:var(--muted);font-size:13px}
+.layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:18px;align-items:start}.panel{background:#131c32ed;border:1px solid var(--line);border-radius:19px;box-shadow:0 16px 45px #0004;overflow:hidden}
+.sidebar{padding:16px;position:sticky;top:12px}.robot{display:flex;gap:12px;align-items:center;padding:12px;background:#202b49;border-radius:13px;margin-bottom:18px}.robot-icon{font-size:42px}.robot strong{display:block}.robot small{color:var(--muted)}.side-title,.eyebrow{font-size:11px;letter-spacing:1.6px;font-weight:900;color:var(--cyan)}
+.case-list{display:grid;gap:7px;margin-top:10px}.casebtn{display:flex;align-items:center;text-align:left;gap:10px;width:100%;padding:9px;background:transparent}.casebtn .num{flex:none;width:31px;height:31px;border-radius:9px;display:grid;place-items:center;background:#293652;color:var(--cyan);font-weight:900}.casebtn.active{background:#302852;border-color:var(--purple)}.casebtn.done .num{background:#21473b;color:var(--green)}.casebtn strong{display:block;font-size:12px}.casebtn small{display:block;font-size:10px;color:var(--muted)}
+.side-note{margin-top:15px;padding:12px;border:1px dashed var(--line);border-radius:11px;color:var(--muted);font-size:12px}
+.main{min-width:0}.welcome,.final{padding:clamp(20px,4vw,38px)}.welcome h2{font-size:clamp(27px,4vw,42px);line-height:1.15;margin:10px 0}.welcome p{color:var(--muted)}.features{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.feature{padding:8px 11px;border-radius:9px;background:#202b49;border:1px solid var(--line);font-size:12px}
+.brief{padding:14px 16px;background:#202944;border-left:3px solid var(--purple);border-radius:9px;margin:14px 0}.brief strong{color:var(--cyan)}
+.identity{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:650px;margin-top:20px}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}.field input{width:100%;padding:12px;background:#0c1326;color:white;border:1px solid var(--line);border-radius:10px}
+.casehead{padding:21px 23px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:start;gap:12px;flex-wrap:wrap}.casehead h2{margin:5px 0;font-size:clamp(23px,3vw,32px)}.casehead p{margin:0;color:var(--muted)}.pill{border:1px solid var(--line);border-radius:999px;padding:6px 10px;color:var(--muted);font-size:12px}
+.casebody{padding:20px;display:grid;gap:16px}.workgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.evidence-panel,.notebook-panel{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#0d1528}
+.subhead{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#192440;padding:12px 14px;border-bottom:1px solid var(--line)}.subhead strong{font-size:12px}.subhead span{font-size:11px;color:var(--muted)}
+.email{padding:15px}.mailtop{display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:12px}.avatar{width:42px;height:42px;border-radius:11px;background:#2b3b5f;display:grid;place-items:center;font-size:22px;flex:none}.mailmeta{min-width:0}.mailmeta strong{display:block}.mailmeta small{display:block;color:var(--muted);overflow-wrap:anywhere}.subject{font-size:17px;font-weight:850;margin:10px 0}.mailcopy{color:#dce4fa}.mailcopy p{margin:8px 0}.linkbox{padding:11px;margin:12px 0;background:#080f20;border:1px solid #3b4b70;border-radius:9px;color:var(--cyan);overflow-wrap:anywhere;font-size:12px;font-family:monospace}.linkbox small{display:block;color:var(--muted);font-family:system-ui;margin-bottom:5px}
+.evidence-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 14px}.evidence-actions button{text-align:left;font-size:12px;padding:10px}.evidence-actions button span{display:block;color:var(--muted);font-size:10px}.evidence-actions button.examined{border-color:var(--green);background:#1c3a35}
+.notebook{padding:13px}.clue-list{display:grid;gap:8px;margin:12px 0}.clue{padding:10px;border:1px solid var(--line);background:#18233b;border-radius:9px;font-size:12px}.clue strong{display:block;color:var(--green);margin-bottom:4px}.clue p{margin:0;color:#d6def2}.empty{text-align:center;padding:18px;color:var(--muted);font-size:12px;border:1px dashed var(--line);border-radius:9px}.tip{background:#252343;color:#d9d7ff;padding:12px;border-radius:10px;font-size:12px}
+.decision{padding:16px;background:#111b30;border:1px solid var(--line);border-radius:14px}.decision h3{margin:0 0 5px}.decision p{font-size:13px;color:var(--muted);margin:0 0 13px}.verdicts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.verdict{text-align:left;padding:12px;background:#202b49}.verdict strong,.verdict small{display:block}.verdict strong{font-size:13px}.verdict small{font-size:10px;color:var(--muted);margin-top:3px}.verdict.selected{border-color:var(--gold);background:#3a3024}
+.submitrow{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:13px}.hint{font-size:12px;color:var(--muted)}.feedback{display:none;padding:16px;border:1px solid var(--line);border-radius:12px}.feedback.show{display:block}.feedback.correct{background:#17382f;border-color:#4d9a76}.feedback.wrong{background:#3b2331;border-color:#a4546b}.feedback h3{margin:0 0 6px}.feedback p{margin:7px 0}.lesson{font-size:13px;color:#d7e2f8}.nextrow{display:flex;justify-content:flex-end}
+.final h2{font-size:34px;margin:7px 0}.scorebig{font-size:48px;font-weight:950;color:var(--green)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.stat{padding:14px;border:1px solid var(--line);background:#1a2743;border-radius:11px}.stat strong{display:block;font-size:22px}.stat small{color:var(--muted)}.review{display:grid;gap:9px}.reviewitem{padding:12px;background:#111a2e;border:1px solid var(--line);border-radius:10px}.reviewitem strong{display:block}.reviewitem small{color:var(--muted)}.hide{display:none!important}.footer{text-align:center;font-size:11px;color:#7f8bab;margin:18px 0}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{position:static}.case-list{grid-template-columns:repeat(2,minmax(0,1fr))}.workgrid{grid-template-columns:1fr}}
+@media(max-width:560px){.wrap{padding:10px}.identity,.verdicts{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.casehead,.casebody{padding:14px}.case-list{grid-template-columns:1fr}}
+@media print{
+ body{background:white!important;color:#111!important}.wrap{max-width:none;padding:0}.top{margin-bottom:10px}.institution{color:#111!important}.sub{color:#333!important}.logo,.sidebar,.welcome,.footer,button{display:none!important}.layout{display:block}.panel,.reviewitem,.stat{background:white!important;color:#111!important;box-shadow:none;border-color:#aaa}.main{display:block}.final{display:block!important;padding:0}.final h2{font-size:25px}.scorebig{color:#111}.reviewitem small,.stat small{color:#333}.brief{background:white;color:#111;border-color:#555}.review{gap:6px}.reviewitem{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+ <div class="brand">
+  <div class="logo">🕵️</div>
+  <div>
+   <div class="institution">SIMATS ENGINEERING · ETHICAL HACKING</div>
+   <h1>ROOBI: Cyber Detective</h1>
+   <div class="sub">Follow the evidence. Find the deception. Protect the system.</div>
+  </div>
+ </div>
+ <div class="pill">🗂️ 20 CASE FILES · OFFLINE GAME</div>
+</header>
+
+<div class="layout">
+<aside class="panel sidebar">
+ <div class="robot"><div class="robot-icon">🤖</div><div><strong>Detective Roobi</strong><small>Your evidence analyst</small></div></div>
+ <div class="side-title">CASE BOARD</div>
+ <div id="caseList" class="case-list"></div>
+ <div class="side-note">🔐 <strong>Investigation rule</strong><br>Never enter a real password. All scenarios are fictional training examples.</div>
+</aside>
+
+<main class="main">
+<section id="welcome" class="panel welcome">
+ <div class="eyebrow">SIMATS ENGINEERING · ETHICAL HACKING</div>
+ <h2>Someone is hiding in plain sight.<br>Can you prove who?</h2>
+ <p>Welcome to the Cyber Investigation Unit. You are not here to guess answers. Examine messages, inspect sender details, uncover suspicious domains, connect clues, and defend your final verdict.</p>
+ <div class="features">
+  <span class="feature">🔎 Inspect evidence</span><span class="feature">🧩 Connect clues</span><span class="feature">🗂 Build a case notebook</span><span class="feature">⚖️ Defend your verdict</span>
+ </div>
+ <div class="brief"><strong>YOUR MISSION</strong><br>Investigate 20 cases. Collect at least two evidence items before submitting each verdict. Correct decisions and thorough investigations earn points.</div>
+ <div class="identity">
+  <div class="field"><label for="studentName">Detective name</label><input id="studentName" maxlength="60" placeholder="Enter your name"></div>
+  <div class="field"><label for="regNo">Register number</label><input id="regNo" maxlength="30" placeholder="Enter register number"></div>
+ </div>
+ <button class="primary" id="startBtn" style="margin-top:15px">Accept the case →</button>
+</section>
+
+<section id="game" class="panel hide">
+ <div class="casehead">
+  <div><div class="eyebrow" id="caseKicker">CASE 01 / 20</div><h2 id="caseTitle"></h2><p id="caseSubtitle"></p></div>
+  <div class="pill" id="caseStatus">OPEN CASE</div>
+ </div>
+ <div class="casebody">
+  <div class="brief" id="brief"></div>
+  <div class="workgrid">
+   <section class="evidence-panel">
+    <div class="subhead"><strong>📨 MESSAGE UNDER INVESTIGATION</strong><span>Fictional sample</span></div>
+    <div class="email">
+     <div class="mailtop"><div class="avatar" id="avatar">✉️</div><div class="mailmeta"><strong id="senderName"></strong><small id="senderAddress"></small><small id="recipient"></small></div></div>
+     <div class="subject" id="subject"></div><div class="mailcopy" id="mailcopy"></div>
+     <div class="linkbox"><small>LINK / DESTINATION</small><span id="visibleLink"></span></div>
+    </div>
+    <div class="evidence-actions" id="evidenceActions"></div>
+   </section>
+   <section class="notebook-panel">
+    <div class="subhead"><strong>🗂 EVIDENCE NOTEBOOK</strong><span id="clueCount">0 clues</span></div>
+    <div class="notebook">
+     <div id="clueList" class="clue-list"><div class="empty">No evidence collected. Use the investigation tools.</div></div>
+     <div class="tip"><strong>Roobi's thinking prompt</strong><div id="tip">One clue rarely proves a message safe or malicious. Look for a pattern.</div></div>
+    </div>
+   </section>
+  </div>
+  <section class="decision">
+   <h3>⚖️ Make your investigative verdict</h3>
+   <p>Choose the best classification based on the evidence you collected.</p>
+   <div class="verdicts" id="verdicts">
+    <button class="verdict" data-v="phishing"><strong>🚨 Phishing</strong><small>Designed to trick or steal</small></button>
+    <button class="verdict" data-v="legitimate"><strong>✅ Legitimate</strong><small>Consistent and expected</small></button>
+    <button class="verdict" data-v="suspicious"><strong>🟠 Suspicious / Verify</strong><small>Not enough to trust yet</small></button>
+   </div>
+   <div class="submitrow"><span class="hint" id="decisionHint">Inspect at least 2 evidence items.</span><button class="primary" id="submitVerdict" disabled>Submit verdict</button></div>
+  </section>
+  <section id="feedback" class="feedback" aria-live="polite"></section>
+  <div class="nextrow"><button class="primary hide" id="nextBtn">Open next case →</button></div>
+ </div>
+</section>
+
+<section id="final" class="panel final hide">
+ <div class="institution">SIMATS ENGINEERING · ETHICAL HACKING</div>
+ <div class="eyebrow" style="margin-top:15px">FINAL INVESTIGATION REPORT</div>
+ <h2 id="finalTitle">Case closed, Detective.</h2>
+ <div class="scorebig" id="finalScore">0 / 100</div>
+ <p id="finalText"></p>
+ <div class="stats">
+  <div class="stat"><strong id="statCorrect">0/20</strong><small>Correct verdicts</small></div>
+  <div class="stat"><strong id="statEvidence">0</strong><small>Evidence items examined</small></div>
+  <div class="stat"><strong id="statRank">Rookie</strong><small>Investigator rank</small></div>
+ </div>
+ <h3>Case-by-case debrief</h3><div id="review" class="review"></div>
+ <div class="features"><button class="primary" id="printBtn">Print / Save as PDF</button><button id="restartBtn">Start a fresh investigation</button></div>
+ <div class="brief"><strong>Privacy note:</strong> This game runs locally. Student details, answers, and scores are not sent to a server or spreadsheet.</div>
+</section>
+</main>
+</div>
+<div class="footer">SIMATS ENGINEERING · ETHICAL HACKING · ROOBI CYBER INVESTIGATION UNIT</div>
+</div>
+
+<script>
+const cases=[
+{
+t:"The Account Lockdown",s:"An urgent security warning lands out of nowhere.",b:"A staff member receives a message claiming their campus account will be disabled in 20 minutes. They did not request a password reset.",
+n:"Campus IT Security",a:"security@simats-account-help.example",av:"⚠️",sub:"ACTION REQUIRED: account suspended in 20 minutes",
+body:["Confirm your password immediately to avoid permanent closure.","Do not contact the help desk because the queue is overloaded."],url:"https://simats-verify.example-login.net/secure",tip:"Urgency is a pressure tactic. Check the registered domain, not just the words before it.",
+ev:[
+["Inspect sender","Sender identity","The display name says Campus IT Security, but the sender uses an unverified domain.",2],
+["Inspect link","Destination domain","The registered domain is example-login.net, not the known campus domain.",3],
+["Check pressure tactics","Manipulation pattern","The message threatens closure in 20 minutes and discourages contacting support.",2],
+["Verify the request","Process mismatch","The user did not request a reset. Check through the known campus portal or IT desk.",2]],
+ans:"phishing",why:"The unrelated domain, extreme urgency, and instruction to avoid real support strongly indicate phishing.",lesson:"Open the known campus portal yourself or contact IT using a saved official contact."
+},
+{
+t:"The Shared Document",s:"A colleague supposedly needs a quick sign-in.",b:"A project team is sharing files. One message says a document is waiting, but the recipient was not expecting this file.",
+n:"Project Workspace",a:"notifications@workspace-files.example",av:"📄",sub:"Maya shared Project Review Notes with you",
+body:["A file has been shared with your account. Sign in to view it.","If unexpected, confirm with the sender through your usual team channel."],url:"https://files.example/view/PR-204",tip:"A professional-looking message is not proof. Verify context and destination.",
+ev:[
+["Inspect sender","Sender domain","The sender uses workspace-files.example, not the known collaboration service.",2],
+["Inspect link","Link destination","The link opens files.example, which has not been verified as the team's service.",3],
+["Check context","Missing confirmation","The file title is plausible, but the recipient did not expect it and no owner is verified.",2],
+["Choose safe verification","Independent check","Ask Maya in the known team chat or open the established workspace directly.",2]],
+ans:"suspicious",why:"The unfamiliar service and missing context require verification, but the message alone does not prove credential theft.",lesson:"Verify through a separate known channel before signing in."
+},
+{
+t:"The Prize Trap",s:"A reward appears, but nobody remembers entering.",b:"A student is promised a new phone if they pay a small fee before a deadline.",
+n:"Student Rewards Desk",a:"winner@prize-claim-bonus.example",av:"🎁",sub:"CONGRATULATIONS — you are today's winner!",
+body:["Your email was selected for a premium smartphone.","Pay a processing fee and enter your card details to release the reward."],url:"http://claim-prize-bonus.example/release?id=8142",tip:"Unexpected prizes, payment requests, and urgency are a dangerous combination.",
+ev:[
+["Inspect sender","Unrecognized sender","The sender domain is unrelated to any known campus program.",2],
+["Inspect link","Unsafe destination","The link uses HTTP and an unverified domain asking for card details.",3],
+["Check the offer","Implausible reward","The recipient never entered a contest but is told they won a valuable device.",2],
+["Inspect requested data","Financial data request","A supposed prize requires card details and a processing fee.",2]],
+ans:"phishing",why:"An unsolicited prize, urgency, unrelated domain, and card request point to a prize scam.",lesson:"Never pay to receive a surprise prize. Verify contests through official websites."
+},
+{
+t:"The Library Reminder",s:"A routine reminder arrives from a familiar service.",b:"A student borrowed a library book. The reminder matches the expected return date.",
+n:"Campus Library System",a:"reminders@library.campus.example",av:"📚",sub:"Library reminder: one item due tomorrow",
+body:["Computer Networks: A Systems Approach is due tomorrow.","Review your loans through the library portal you normally use."],url:"https://library.campus.example/account/loans",tip:"Expected context and a matching domain support trust, but never assume blindly.",
+ev:[
+["Inspect sender","Consistent sender","The address matches the campus library domain in this fictional scenario.",2],
+["Inspect link","Expected destination","The link is within campus.example and uses HTTPS.",3],
+["Check context","Expected reminder","The student borrowed the named book and the due date matches the record.",2],
+["Review requested action","Low-risk request","No password, card number, payment, or one-time code is requested by email.",2]],
+ans:"legitimate",why:"The sender, destination, and reminder match the known library service and borrowing activity.",lesson:"HTTPS alone is not proof of safety. Use a bookmark or known portal when uncertain."
+},
+{
+t:"The Payroll Change",s:"A routine-looking form asks for sensitive information.",b:"An employee is asked to update bank details before salary processing, but no change was requested.",
+n:"Payroll Operations",a:"payroll@hr-update-portal.example",av:"💳",sub:"Salary may be delayed — confirm bank account today",
+body:["Confirm your bank account and upload an identity document.","This form is the only way to prevent a delay. Managers cannot help."],url:"https://hr-update-portal.example/employee/confirm",tip:"HTTPS encrypts a connection; it does not prove the site belongs to the organization.",
+ev:[
+["Inspect sender","Unverified payroll identity","The sender domain is not the known HR or payroll domain.",2],
+["Inspect link","Separate domain","The link points to an unverified HR portal despite using HTTPS.",3],
+["Check requested data","High-risk request","Bank details and identity documents are requested through an unsolicited link.",2],
+["Check pressure","Process bypass","The message threatens salary delay and discourages normal support.",2]],
+ans:"phishing",why:"The unverified domain, sensitive-data request, and pressure are strong phishing indicators.",lesson:"Contact HR through a known internal channel. Never update payroll through an unexpected email."
+},
+{
+t:"The Meeting Invite",s:"A plausible meeting update hides an unusual destination.",b:"A team member expects a meeting invite. The message seems plausible, but the link needs closer inspection.",
+n:"Team Calendar",a:"calendar@campus.example",av:"🗓️",sub:"Updated project meeting — Thursday, 2:30 PM",
+body:["The project meeting has moved to Thursday at 2:30 PM.","If unexpected, confirm with the organizer through your normal team chat."],url:"https://campus.example.calendar-invite.help/agenda/77",tip:"Read hostnames from right to left. Familiar words in a hostname may be camouflage.",
+ev:[
+["Inspect sender","Familiar sender","The sender appears consistent with the campus domain, but that does not prove the link is safe.",2],
+["Inspect link","Hostname mismatch","The registered domain is calendar-invite.help, not campus.example.",3],
+["Check context","Plausible but unconfirmed","A meeting update is plausible, but should be checked in the known calendar.",2],
+["Choose safe next step","Independent confirmation","Open the calendar app directly or ask the organizer through a known channel.",2]],
+ans:"suspicious",why:"The meeting story is plausible, but the destination domain is not the campus domain.",lesson:"Verify the event independently and avoid the suspicious link."
+},
+{
+t:"The QR Code Notice",s:"A printed QR code promises a campus Wi-Fi upgrade.",b:"A noticeboard asks students to scan a QR code and enter campus credentials. IT has not announced an upgrade.",
+n:"Campus Wi-Fi Team",a:"wifi-support@campus-network-check.example",av:"📱",sub:"Scan the QR code to keep your Wi-Fi access",
+body:["Scan the code and sign in with your campus username and password.","Access may be blocked today if you do not complete the process."],url:"https://campus-wifi-check.example/login",tip:"QR codes hide destinations. Treat them like links.",
+ev:[
+["Inspect sender","Unverified Wi-Fi team","The sender domain does not match the known campus IT domain.",2],
+["Inspect link","Separate domain","The destination is campus-wifi-check.example, not a verified campus service.",3],
+["Check announcement","Unannounced change","IT has not announced a Wi-Fi upgrade or new sign-in process.",2],
+["Review requested data","Credential collection","The page asks for campus credentials under time pressure.",2]],
+ans:"phishing",why:"An unverified notice and domain ask for credentials under threat of access loss.",lesson:"Preview QR destinations and verify unexpected notices with IT."
+},
+{
+t:"The MFA Approval",s:"A sign-in prompt appears when you are not signing in.",b:"A student receives a push notification asking them to approve a login they did not initiate.",
+n:"Identity Access Alert",a:"alerts@identity-check.example",av:"🔐",sub:"Approve sign-in request now",
+body:["A sign-in request is waiting for approval.","If you did not initiate it, do not approve and report it to IT."],url:"https://identity-check.example/approve",tip:"An unexpected MFA prompt may mean someone has your password.",
+ev:[
+["Inspect sender","Unverified identity service","The sender domain is not the known campus identity domain.",2],
+["Inspect link","Unfamiliar approval page","The destination is not the known sign-in portal.",3],
+["Check timing","Unexpected authentication","The student is not signing in, so the prompt may indicate an attempted account compromise.",2],
+["Choose safe response","Deny and report","Do not approve. Secure the account through the known portal and notify IT.",2]],
+ans:"suspicious",why:"An unsolicited MFA request is serious, but verify the source through the official service.",lesson:"Never approve authentication requests you did not initiate."
+},
+{
+t:"The Internship Shortlist",s:"A recruitment message asks for a fee to secure an interview.",b:"A student receives an internship offer from a company they never contacted.",
+n:"Talent Acquisition Desk",a:"careers@fast-track-internships.example",av:"💼",sub:"Selected for internship — pay registration fee today",
+body:["You have been shortlisted without an interview.","Pay a refundable fee and upload your identity document to reserve the position."],url:"https://fast-track-internships.example/confirm",tip:"Upfront fees and guaranteed selection are common recruitment-scam signals.",
+ev:[
+["Inspect sender","Unverified recruiter","The domain has not been confirmed through the employer's official website.",2],
+["Inspect link","Unverified portal","The destination does not establish that a real employer owns it.",3],
+["Check offer","Guaranteed selection","The message promises selection without an interview and demands a fee.",2],
+["Inspect request","Payment and ID request","Money and identity documents are requested before the employer is verified.",2]],
+ans:"phishing",why:"The message combines guaranteed selection, an upfront fee, urgency, and an identity-document request.",lesson:"Verify vacancies through the employer's official careers page and placement office."
+},
+{
+t:"The Storage Quota",s:"A storage warning threatens to delete all files.",b:"An email says the student's cloud storage is full, but no warning appears in the actual service.",
+n:"Cloud Storage Support",a:"support@storage-capacity-alert.example",av:"☁️",sub:"Storage full — files will be deleted in 24 hours",
+body:["Your account has exceeded its quota. Sign in immediately.","Use the link to increase storage and prevent deletion."],url:"https://storage-capacity-alert.example/upgrade",tip:"Check storage status by opening the service directly.",
+ev:[
+["Inspect sender","Unrecognized support domain","The sender domain does not match the known cloud provider.",2],
+["Inspect link","Unrelated destination","The provider-like name does not prove domain ownership.",3],
+["Check threat","Extreme deletion warning","The 24-hour threat pressures the user to act without checking.",2],
+["Verify status","No in-app warning","Open the actual cloud app or known website to check the quota.",2]],
+ans:"phishing",why:"An unrelated domain and urgent deletion threat push the user toward an unverified sign-in page.",lesson:"Check cloud storage through the official app and report suspicious messages."
+},
+{
+t:"The Event Registration",s:"A real workshop has an unverified follow-up link.",b:"A department announced a student workshop. A follow-up asks attendees to confirm on a new external page.",
+n:"Workshop Coordination",a:"events@campus.example",av:"🎓",sub:"Workshop attendance confirmation",
+body:["Thank you for registering. Confirm attendance using the link.","You can also confirm with the department office."],url:"https://campus-workshop-confirm.example/attend",tip:"A real event can be used as bait. Verify the follow-up with the organizer.",
+ev:[
+["Inspect sender","Familiar sender","The sender appears to use the campus domain; inspect the link separately.",2],
+["Inspect link","External registration domain","The link points to an unverified separate domain.",3],
+["Check event context","Real event","The workshop is real, but that does not prove the external link is authorized.",2],
+["Review request","Verify before submitting","Ask the organizer or use the original registration portal.",2]],
+ans:"suspicious",why:"The event is real, but the external registration domain has not been verified.",lesson:"Validate destinations even when the message refers to a real event."
+},
+{
+t:"The Fake Tech Support Call",s:"A caller wants remote access to fix a problem you did not report.",b:"A caller claims suspicious activity was detected on the student's laptop and requests a remote-access tool.",
+n:"Technical Support Caller",a:"Caller ID: Support Desk",av:"☎️",sub:"Urgent device security fix",
+body:["Install a remote-access tool and read out a one-time code.","The device will be blocked unless you follow the instructions immediately."],url:"Remote-access tool requested during the call",tip:"Caller ID can be spoofed. Never share one-time codes with an unsolicited caller.",
+ev:[
+["Inspect caller identity","Caller not authenticated","The caller has no independently verified ticket; caller ID is not proof.",2],
+["Inspect requested tool","Remote-control request","The tool could let an attacker control the device.",3],
+["Check code request","Authentication risk","A support caller should not ask for a one-time code to prove identity.",2],
+["Check pressure","Threat of blocking","The caller pressures the student to avoid consulting real IT support.",2]],
+ans:"phishing",why:"The unsolicited caller combines unverified identity, remote access, a one-time-code request, and pressure.",lesson:"End the call and contact IT through a known official number."
+},
+{
+t:"The Password Reset You Requested",s:"A reset email follows an action you initiated.",b:"The student has just requested a password reset through the official campus portal.",
+n:"Campus Account Service",a:"no-reply@accounts.campus.example",av:"🔑",sub:"Your requested password reset",
+body:["We received a password-reset request for your account.","If you initiated it, return to the portal you opened yourself. If not, contact IT."],url:"No direct sign-in link; use the portal you opened yourself",tip:"A request you initiated differs from an unexpected reset. Use the known portal.",
+ev:[
+["Inspect sender","Consistent account domain","The sender matches the fictional campus account service.",2],
+["Inspect link","No embedded login link","The message directs you back to the portal you opened yourself.",3],
+["Check context","Reset was requested","The student initiated the reset just before the message arrived.",2],
+["Review instructions","Safe guidance","The message recommends the known portal and contacting IT if unexpected.",2]],
+ans:"legitimate",why:"The reset follows an action the student initiated and directs them to the known portal.",lesson:"Use the official portal and never share reset codes with another person."
+},
+{
+t:"The Shared Password Spreadsheet",s:"A document asks for an email password to unlock an exam seating plan.",b:"A class group receives a spreadsheet that asks every student to enter their email password to reveal their seat.",
+n:"Class Representative",a:"classrep@campus.example",av:"📊",sub:"Exam seating plan — enter password to unlock",
+body:["Enter your campus email password in the spreadsheet.","Complete this before the end of the day."],url:"Spreadsheet attachment; password-entry field inside the file",tip:"A seating plan does not need your email password.",
+ev:[
+["Inspect sender","Familiar sender, unusual request","A known sender may be compromised or impersonated.",2],
+["Inspect file","Password collection","The spreadsheet asks for an email password, which is not a normal requirement.",3],
+["Check purpose","Unnecessary credentials","A seating plan needs no email password.",2],
+["Verify with department","Independent confirmation","Check the official notice or contact the representative through a known channel.",2]],
+ans:"phishing",why:"The file asks for an email password to access information that should not require credentials.",lesson:"Never enter passwords into shared documents. Report the file and confirm details officially."
+},
+{
+t:"The Delivery Fee Message",s:"A parcel notice asks for a small payment and card details.",b:"A student expects a parcel, but the message gives no matching tracking number or courier details.",
+n:"Parcel Delivery Team",a:"delivery@parcel-fee-check.example",av:"📦",sub:"Delivery failed — pay a small re-delivery fee",
+body:["Pay a small fee to arrange another delivery attempt.","Enter your card number and security code to release the parcel."],url:"https://parcel-fee-check.example/redelivery",tip:"A real parcel can be used as bait. Check the retailer or courier directly.",
+ev:[
+["Inspect sender","Courier not identified","The sender uses a generic domain and gives no verifiable courier details.",2],
+["Inspect link","Unverified payment page","The link opens an unverified domain.",3],
+["Check order context","Missing tracking reference","The message does not match a known order or tracking number.",2],
+["Inspect payment","Card security code requested","The message asks for sensitive payment details through an unexpected link.",2]],
+ans:"phishing",why:"The unverified domain, missing tracking details, and card-security request point to a delivery scam.",lesson:"Use the retailer or courier's official app to check delivery status."
+},
+{
+t:"The Research Survey",s:"A department survey asks for feedback, not account secrets.",b:"The department announced a student feedback survey in class. The follow-up matches that announcement.",
+n:"Department Research Coordinator",a:"research@campus.example",av:"📝",sub:"Reminder: student lab feedback survey",
+body:["Please share feedback about the recent lab session.","You can also access the survey through the official learning portal."],url:"https://survey.campus.example/lab-feedback",tip:"Expected context, a matching domain, and a proportionate request support trust.",
+ev:[
+["Inspect sender","Consistent department domain","The sender matches the fictional campus domain.",2],
+["Inspect link","Expected survey subdomain","The destination is within campus.example and uses HTTPS.",3],
+["Check context","Survey was announced","The department announced the survey and the subject matches.",2],
+["Review data","Relevant feedback only","The survey does not request passwords or financial information.",2]],
+ans:"legitimate",why:"The survey matches a known announcement and asks only for relevant feedback.",lesson:"Confirm the destination and avoid sharing unnecessary sensitive information."
+},
+{
+t:"The Fake Security Update",s:"A pop-up says the computer is infected and demands a download.",b:"A website pop-up claims the device has viruses and offers a one-click repair tool.",
+n:"Browser Security Warning",a:"Browser pop-up, not a verified system alert",av:"🛡️",sub:"CRITICAL: device infected — install this cleaner",
+body:["The pop-up claims files will be damaged unless a tool is installed.","It asks the student to download software from an unfamiliar website."],url:"https://instant-device-cleaner.example/download",tip:"A webpage cannot prove the computer is infected just by showing a scary message.",
+ev:[
+["Inspect source","Website pop-up","The warning appeared inside a webpage, not the trusted security application.",2],
+["Inspect link","Unknown software publisher","The download comes from an unverified domain.",3],
+["Check pressure","Fear-based urgency","The pop-up uses a dramatic warning and deadline.",2],
+["Choose safe response","Close and scan safely","Close the tab and use trusted security software or contact IT.",2]],
+ans:"phishing",why:"The webpage uses a fake security warning to pressure the user into installing unknown software.",lesson:"Do not install software from scary pop-ups. Use trusted security tools."
+},
+{
+t:"The Conference Certificate",s:"A certificate link arrives after an event you attended.",b:"The student attended a real seminar and expects a certificate. The message matches the seminar title and date.",
+n:"Seminar Organizing Team",a:"seminar@campus.example",av:"🏅",sub:"Your participation certificate is ready",
+body:["Thank you for attending. Your certificate is available through the department event page.","If needed, open the event page through the department portal."],url:"https://events.campus.example/certificates/seminar-2026",tip:"Expected timing and details support trust, but inspect the destination.",
+ev:[
+["Inspect sender","Consistent event sender","The sender matches the fictional campus domain.",2],
+["Inspect link","Expected event portal","The destination is within campus.example and uses HTTPS.",3],
+["Check event details","Matching context","The student attended the seminar and the title and date match.",2],
+["Review action","Proportionate request","The message does not demand passwords, payments, or codes.",2]],
+ans:"legitimate",why:"The event, timing, sender, and destination are consistent and no sensitive data is demanded.",lesson:"Use the official event portal. Verify any unexpected demand for credentials or payment."
+},
+{
+t:"The Fake HOD Instruction",s:"An urgent message claims to come from a senior faculty member.",b:"A message uses a department leader's name and asks staff to buy gift cards for a visiting speaker.",
+n:"Head of Department",a:"hod.office.request@urgent-purchase.example",av:"👤",sub:"Confidential request — buy gift cards immediately",
+body:["Purchase gift cards and send me the redemption codes.","Keep this confidential and do not verify with anyone else."],url:"No link; asks for gift-card codes by reply",tip:"Authority, secrecy, urgency, and unusual payment methods are common impersonation signals.",
+ev:[
+["Inspect sender","Impersonated authority","The address is not the known institutional email domain.",2],
+["Inspect action","Gift-card payment request","Gift-card redemption codes are not a normal institutional purchasing process.",3],
+["Check pressure","Secrecy and urgency","The sender demands immediate action and forbids verification.",2],
+["Verify independently","Use a known channel","Contact the leader using a known phone number or official account.",2]],
+ans:"phishing",why:"The message impersonates authority and demands gift-card codes under secrecy and urgency.",lesson:"Verify unusual financial requests through a separate trusted channel."
+},
+{
+t:"The Password Expiry Notice",s:"A routine notice asks you to type your password into a linked form.",b:"An email says the campus password expires today and threatens suspension unless the student fills in a form.",
+n:"Account Maintenance",a:"maintenance@password-expiry-center.example",av:"⏳",sub:"Password expires today — renew to avoid suspension",
+body:["Complete the renewal form to keep access.","Enter your current password and new password in the linked form."],url:"https://password-expiry-center.example/renew",tip:"Password updates should happen through the official account portal.",
+ev:[
+["Inspect sender","Unrelated domain","The sender is not using the known campus account domain.",2],
+["Inspect link","Separate renewal site","The link points to an unverified domain.",3],
+["Review form","Current password requested","The form asks for credentials through an email link.",2],
+["Check deadline","Urgent suspension threat","The message pressures the student to act before verifying.",2]],
+ans:"phishing",why:"The unverified domain, credential form, and urgent threat indicate password harvesting.",lesson:"Open the official account portal directly to check password status."
+},
+{
+t:"The Internship Assessment",s:"A real application is followed by a plausible next step.",b:"The student applied through the company's official careers portal yesterday. The invitation matches the role and application reference.",
+n:"Recruitment Team",a:"recruitment@careers.example",av:"🧑‍💻",sub:"Next step: software intern assessment",
+body:["Thank you for applying. Your reference is INT-2048.","Open the assessment from the company's careers portal. Contact the recruiter through the official careers page if unsure."],url:"No direct login link; use the known careers portal",tip:"A legitimate message can direct you to a trusted route without asking for secrets.",
+ev:[
+["Inspect sender","Recruitment domain matches","The sender uses the fictional company's known recruitment domain.",2],
+["Inspect link guidance","No unexpected sign-in link","The message says to open the known careers portal directly.",3],
+["Check application","Expected follow-up","The role and reference match the application receipt.",2],
+["Review request","No fee or secret","The message does not ask for payment or passwords.",2]],
+ans:"legitimate",why:"The message matches an application the student initiated and directs them to the known portal.",lesson:"Continue through the official careers portal and verify requests for money or sensitive documents."
+},
+{
+t:"The Fake Cloud File Share",s:"A shared file asks you to re-authenticate through a lookalike page.",b:"A classmate supposedly shared lecture notes, but the link opens an unverified domain.",
+n:"Cloud File Notification",a:"share@cloud-docs-access.example",av:"🗃️",sub:"Lecture notes shared — sign in to view",
+body:["A classmate has shared lecture notes. Sign in to view the document.","If unexpected, verify with the sender before opening it."],url:"https://cloud-docs-access.example/signin",tip:"Lookalike service names are not the same as the real service domain.",
+ev:[
+["Inspect sender","Lookalike notification domain","The sender domain is not the known cloud platform domain.",2],
+["Inspect link","Lookalike sign-in page","The destination is a separate registered domain imitating a cloud service.",3],
+["Check context","Share not confirmed","Confirm the file with the classmate through a known channel.",2],
+["Review login","Credential entry requested","Do not enter campus credentials on an unverified domain.",2]],
+ans:"phishing",why:"The message uses a lookalike domain and requests credentials through an unverified sign-in page.",lesson:"Open cloud storage through the official app or bookmark and verify unexpected shares."
+},
+{
+t:"The Security Incident Report",s:"A legitimate internal message requests a report, not credentials.",b:"IT announced a security-awareness exercise. Students are asked to report suspicious emails through the established learning portal.",
+n:"Campus IT Awareness Team",a:"awareness@campus.example",av:"🧾",sub:"Security awareness: report suspicious messages",
+body:["Submit a short report through the learning portal.","Do not forward passwords or authentication codes. Contact IT through its published channel if unsure."],url:"https://learn.campus.example/security-report",tip:"Legitimate reporting should never ask you to expose passwords or authentication codes.",
+ev:[
+["Inspect sender","Consistent awareness sender","The sender matches the campus domain and announced exercise.",2],
+["Inspect link","Expected learning portal","The destination is the known learning portal in this scenario.",3],
+["Check announcement","Exercise was announced","The IT team announced this exercise before the message arrived.",2],
+["Review data","No secrets requested","The message explicitly warns students not to submit passwords or codes.",2]],
+ans:"legitimate",why:"The message matches the announced exercise, uses the expected portal, and gives safe instructions.",lesson:"Use official reporting channels but never include passwords or one-time codes."
+},
+{
+t:"The Fake Cloud Backup Failure",s:"A backup warning asks you to install an unknown recovery utility.",b:"A message claims coursework backup failed and recommends downloading a recovery program from an unfamiliar domain.",
+n:"Backup Recovery Center",a:"recovery@backup-repair-center.example",av:"💾",sub:"Backup failed — download recovery tool immediately",
+body:["Your recent backup is corrupted. Install the recovery tool.","Start within one hour or the backup may be permanently lost."],url:"https://backup-repair-center.example/recovery-tool",tip:"Check backup status in the official application. Do not install unknown recovery software from surprise alerts.",
+ev:[
+["Inspect sender","Unverified recovery sender","The sender is not the known backup provider.",2],
+["Inspect link","Unknown software download","The destination offers an unverified recovery tool.",3],
+["Check threat","Data-loss pressure","The deadline pressures the user to run software without checking.",2],
+["Verify backup","Use official app","Open the backup application directly to review status.",2]],
+ans:"phishing",why:"An unverified download exploits fear of losing files to push the user into installing software.",lesson:"Check backup health through the official application and keep a separate backup copy."
+},
+{
+t:"The Alumni Donation Request",s:"A charitable appeal uses a familiar institution's name.",b:"A message claims to collect donations for a campus scholarship fund, but the appeal is not on official channels.",
+n:"SIMATS Scholarship Fund",a:"donations@scholarship-support.example",av:"❤️",sub:"Help a student today — donate through this link",
+body:["Donate today through the linked page.","Verify this appeal through the institution's official website before contributing."],url:"https://scholarship-support.example/donate",tip:"A worthy cause can still be impersonated. Verify the campaign and payment route independently.",
+ev:[
+["Inspect sender","Unverified donation sender","The sender is not confirmed as an official fundraising channel.",2],
+["Inspect link","Unverified donation website","The link does not point to a known official institution page.",3],
+["Check campaign","Appeal not confirmed","The student has not seen the campaign on official channels.",2],
+["Verify payment","Confirm beneficiary","Contact the institution through published contact details before transferring money.",2]],
+ans:"suspicious",why:"The fundraising identity and payment destination are unverified. Do not transfer money until confirmed.",lesson:"Check the official website or call the published office number before donating."
+},
+{
+t:"The Fake Exam Result Portal",s:"A message claims results are ready but asks for account credentials.",b:"Before the official announcement, a message says students can view marks early through a new portal.",
+n:"Examination Results Desk",a:"results@early-marks-access.example",av:"🧮",sub:"Early access to exam results — sign in now",
+body:["Your marks are available before the official release. Sign in with your campus email and password.","Do not share this message because access is limited."],url:"https://early-marks-access.example/results",tip:"Secret access and exclusivity can lure people into bypassing official procedures.",
+ev:[
+["Inspect sender","Unverified results sender","The sender does not use the known examination portal domain.",2],
+["Inspect link","Unofficial results site","The registered domain is not the official campus portal.",3],
+["Check timing","Early access claim","The official results have not been announced.",2],
+["Review login","Campus password requested","The page asks for credentials through an unfamiliar link.",2]],
+ans:"phishing",why:"The message promises secret early access, uses an unofficial domain, and requests campus credentials.",lesson:"Wait for official announcements and access results through the known portal."
+}
+];
+
+const $=id=>document.getElementById(id);
+let current=0,selected=null,examined=new Set(),notebook=[],results=[],student="",reg="";
+
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function verdictName(v){return v==="phishing"?"Phishing":v==="legitimate"?"Legitimate":"Suspicious / Verify"}
+
+function renderList(){
+ $("caseList").innerHTML=cases.map((c,i)=>`<button class="casebtn ${i===current?"active":""} ${results[i]?"done":""}" data-case="${i}" ${i>current&&!results[i]?"disabled":""}><span class="num">${results[i]?"✓":String(i+1).padStart(2,"0")}</span><span><strong>${esc(c.t)}</strong><small>${results[i]?"CASE CLOSED":i===current?"CURRENT CASE":i<current?"COMPLETED":"LOCKED"}</small></span></button>`).join("");
+}
+function start(){
+ student=$("studentName").value.trim();reg=$("regNo").value.trim();
+ if(!student||!reg){alert("Please enter your detective name and register number.");return}
+ $("welcome").classList.add("hide");$("game").classList.remove("hide");renderList();loadCase();
+}
+function loadCase(){
+ const c=cases[current];selected=null;examined=new Set();notebook=[];
+ $("caseKicker").textContent=`CASE ${String(current+1).padStart(2,"0")} / ${cases.length}`;
+ $("caseTitle").textContent=c.t;$("caseSubtitle").textContent=c.s;$("brief").textContent=c.b;$("caseStatus").textContent="OPEN CASE";
+ $("senderName").textContent=c.n;$("senderAddress").textContent=c.a;$("recipient").textContent="To: investigator@campus.example";$("avatar").textContent=c.av;$("subject").textContent=c.sub;
+ $("mailcopy").innerHTML=c.body.map(p=>`<p>${esc(p)}</p>`).join("");$("visibleLink").textContent=c.url;$("tip").textContent=c.tip;
+ $("evidenceActions").innerHTML=c.ev.map((e,i)=>`<button data-e="${i}">${esc(e[0])}<span>${esc(e[1])}</span></button>`).join("");
+ $("clueList").innerHTML='<div class="empty">No evidence collected. Use the investigation tools.</div>';$("clueCount").textContent="0 clues";
+ document.querySelectorAll(".verdict").forEach(b=>{b.classList.remove("selected");b.disabled=false});
+ $("submitVerdict").disabled=true;$("decisionHint").textContent="Inspect at least 2 evidence items.";
+ $("feedback").className="feedback";$("feedback").innerHTML="";$("nextBtn").classList.add("hide");renderList();
+}
+function inspect(i){
+ if(examined.has(i))return;
+ examined.add(i);notebook.push(cases[current].ev[i]);
+ const btn=document.querySelector(`[data-e="${i}"]`);if(btn)btn.classList.add("examined");
+ $("clueCount").textContent=`${notebook.length} / 4 clues collected`;
+ $("clueList").innerHTML=notebook.map((e,n)=>`<div class="clue"><strong>CLUE ${String(n+1).padStart(2,"0")} · ${esc(e[1])}</strong><p>${esc(e[2])}</p></div>`).join("");
+ $("decisionHint").textContent=notebook.length>=2?"Evidence threshold met. Select your verdict.":`Collect ${2-notebook.length} more clue(s) to unlock your verdict.`;
+ $("submitVerdict").disabled=notebook.length<2;
+}
+function submit(){
+ if(!selected||notebook.length<2)return;
+ const c=cases[current],correct=selected===c.ans;
+ const points=(correct?10:0)+Math.min(5,Math.floor(notebook.reduce((s,e)=>s+e[3],0)/2));
+ results[current]={choice:selected,correct,clues:notebook.length,points};
+ $("caseStatus").textContent=correct?"VERDICT SUPPORTED":"VERDICT REVIEW";
+ $("feedback").className="feedback show "+(correct?"correct":"wrong");
+ $("feedback").innerHTML=`<h3>${correct?"✓ Good investigation.":"↺ Review your assumptions."}</h3><p><strong>Correct classification:</strong> ${verdictName(c.ans)}</p><p>${esc(c.why)}</p><p class="lesson"><strong>Detective lesson:</strong> ${esc(c.lesson)}</p><p class="hint">Case score: ${points}/15 · Evidence examined: ${notebook.length}/4</p>`;
+ document.querySelectorAll(".verdict").forEach(b=>b.disabled=true);$("submitVerdict").disabled=true;
+ $("decisionHint").textContent="Verdict submitted. Read the debrief, then continue.";
+ $("nextBtn").textContent=current===cases.length-1?"View final report →":"Open next case →";$("nextBtn").classList.remove("hide");
+}
+function nextCase(){if(current<cases.length-1){current++;loadCase()}else showFinal()}
+function showFinal(){
+ $("game").classList.add("hide");$("final").classList.remove("hide");
+ const total=results.reduce((s,r)=>s+(r?r.points:0),0),score=Math.round(total/(cases.length*15)*100);
+ const correct=results.filter(r=>r&&r.correct).length,clues=results.reduce((s,r)=>s+(r?r.clues:0),0);
+ $("finalScore").textContent=score+" / 100";
+ $("finalTitle").textContent=score>=85?"Outstanding, Detective!":score>=65?"Good work, Detective!":"Training complete, Detective!";
+ $("finalText").textContent=`Detective: ${student} | Register number: ${reg}. You investigated all 20 case files. Strong investigators verify identity, inspect registered domains, consider context, and use trusted channels when evidence is mixed.`;
+ $("statCorrect").textContent=correct+"/20";$("statEvidence").textContent=clues+"/80";
+ $("statRank").textContent=score>=90?"Lead Investigator":score>=75?"Senior Detective":score>=55?"Field Detective":"Rookie Detective";
+ $("review").innerHTML=cases.map((c,i)=>{const r=results[i];return `<div class="reviewitem"><strong>${String(i+1).padStart(2,"0")}. ${esc(c.t)} — ${r.correct?"✓ Correct":"↺ Review"}</strong><small>Your verdict: ${verdictName(r.choice)} · Best classification: ${verdictName(c.ans)} · Evidence: ${r.clues}/4 · Score: ${r.points}/15</small><p>${esc(c.lesson)}</p></div>`}).join("");
+ $("caseList").innerHTML=cases.map((c,i)=>`<div class="casebtn done"><span class="num">✓</span><span><strong>${esc(c.t)}</strong><small>CASE CLOSED</small></span></div>`).join("");
+}
+$("startBtn").addEventListener("click",start);
+$("caseList").addEventListener("click",e=>{const b=e.target.closest("[data-case]");if(b&&!b.disabled&&Number(b.dataset.case)===current)loadCase()});
+$("evidenceActions").addEventListener("click",e=>{const b=e.target.closest("[data-e]");if(b)inspect(Number(b.dataset.e))});
+$("verdicts").addEventListener("click",e=>{const b=e.target.closest("[data-v]");if(!b||b.disabled)return;selected=b.dataset.v;document.querySelectorAll(".verdict").forEach(x=>x.classList.toggle("selected",x===b))});
+$("submitVerdict").addEventListener("click",submit);$("nextBtn").addEventListener("click",nextCase);
+$("printBtn").addEventListener("click",()=>window.print());
+$("restartBtn").addEventListener("click",()=>{current=0;selected=null;examined=new Set();notebook=[];results=[];$("final").classList.add("hide");$("welcome").classList.remove("hide");$("studentName").value=student;$("regNo").value=reg;renderList()});
+renderList();
+</script>
+</body>
+</html>
